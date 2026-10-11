@@ -1,0 +1,18 @@
+# Nixpacks installs corepack 0.24.1, which launches pnpm from bin/pnpm.cjs.
+# pnpm 12 only ships bin/pnpm.mjs, and corepack 0.34.5+ knows that path.
+# 0.34.7 is the newest release that still runs on the Node 22.11 image Nixpacks builds.
+[phases.install]
+dependsOn = ["setup"]
+cmds = [
+  "npm install -g corepack@0.34.7",
+  "corepack enable",
+  "corepack install",
+  "NPM_CONFIG_PRODUCTION=false NODE_ENV=development pnpm install --frozen-lockfile",
+]
+
+[start]
+cmd = "node .output/server/index.mjs"
+
+[variables]
+HOST = "0.0.0.0"
+NITRO_HOST = "0.0.0.0"
