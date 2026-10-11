@@ -92,7 +92,7 @@ const orderedPrs = computed(() => {
       <a :href="userUrl" target="_blank"><UAvatar
         :src="user.avatar"
         :alt="user.name"
-        size="xl"
+        size="3xl"
       />
       </a>
       <h1 class="text-2xl sm:text-3xl text-center">
